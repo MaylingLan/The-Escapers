@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Escaper</title>
+    <link rel="stylesheet" href="escaper.css">
+</head>
+
+<body>
+    <!-- dream music -->
+    <audio id="dreamaudio" loop preload="auto">
+        <source src="audio/flowergarden.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- dream control button -->
+    <button id="audioToggle" class="dream-conductor" type="button" aria-label="Toggle background music">
+    <svg id="audioIcon" viewBox="0 0 24 24" aria-hidden="true">
+        <path class="spk" d="M4 9v6h4l5 4V5L8 9H4z"/>
+        <path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path class="mute" d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+</button>
+
+    <div id="dreamcanvas">
+        <div id="dreamwall">
+
+            <div id="escaperintro" class="escaperintro-scene">
+                
+                <!-- First scene: YaoLanLy's portrait showing up -->
+                <!-- Flying dreamwords -->
+                <div id="dreamwords">
+                   <span class="dreamword word--ly" style="left:44%;top:11.5%">Ly</span>
+                   <span class="dreamword word--lan" style="left:85%;top:16%;animation-delay:-4s">Lan</span>
+                   <span class="dreamword word--yao" style="left:8%;top:14.5%;animation-delay:-1s">Yao</span>
+                </div>
+                <!-- 3 windows -->
+                <div id="escaperportrait">
+                    <!-- Yao -->
+                    <div class="window window--yao" data-char="yao">
+                        <div class="dreamsparkle" data-count="50"></div>
+                        <img class="layer layer--text" src="escaperimage/yao-text.png" style="--depth:-.3; --tw:12; --tx:0; --ty:0" alt="">
+                        <img class="layer layer--shadow-a" src="escaperimage/yao-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--shadow-b" src="escaperimage/yao-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--char" src="escaperimage/yao.png" style="--depth:1" alt="Yao">
+                    </div>
+                    <!-- Ly -->
+                    <div class="window window--ly" data-char="ly">
+                        <div class="lanbg lanset"></div>
+                        <div class="yaobg yaoset"></div>
+
+                        <div class="dreamsparkle" data-count="50"></div>
+                        <div class="dreamglitter" data-count="30"></div>
+
+                        <img class="layer layer--text lyset" src="escaperimage/ly-text.png" style="--depth:-.3; --tw:12; --tx:0; --ty:0" alt="">
+                        <img class="layer layer--shadow-a lyset" src="escaperimage/ly-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--shadow-b lyset" src="escaperimage/ly-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--char layer--charwoke lyset" src="escaperimage/ly.png" style="--depth:1" alt="Ly">
+                        <img class="layer layer--char layer--charsleep lyset" src="escaperimage/sleepy-ly.png" style="--depth:1" alt="Ly">
+                        <!-- Lan's transition -->
+                         <img class="layer layer--text lanset" src="escaperimage/lan-text.png" style="--depth:-.3; --tw:12; --tx:0; --ty:0" alt="">
+                         <img class="layer layer--shadow-a lanset" src="escaperimage/lan-shadow.png" style="--depth:.5" alt="">
+                         <img class="layer layer--shadow-b lanset" src="escaperimage/lan-shadow.png" style="--depth:.5" alt="">
+                         <img class="layer layer--char layer--lanwoke lanset" src="escaperimage/lan.png" style="--depth:1" alt="Lan">
+                         <img class="layer layer--char layer--lansleep lanset" src="escaperimage/sleepy-lan.png" style="--depth:1" alt="Lan">
+                         <!-- Yao's transition -->
+                        <img class="layer layer--text yaoset" src="escaperimage/yao-text.png" style="--depth:-.3; --tw:12; --tx:0; --ty:0" alt="">
+                        <img class="layer layer--shadow-a yaoset" src="escaperimage/yao-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--shadow-b yaoset" src="escaperimage/yao-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--char layer--yaowoke yaoset" src="escaperimage/yao.png" style="--depth:1" alt="Yao">
+                        <img class="layer layer--char layer--yaosleep yaoset" src="escaperimage/sleepy-yao.png" style="--depth:1" alt="Yao">  
+                    </div>
+
+                    <!-- Lan -->
+                    <div class="window window--lan" data-char="lan">
+                        <div class="dreamsparkle" data-count="50"></div>
+                        <img class="layer layer--text" src="escaperimage/lan-text.png" style="--depth:-.3; --tw:12; --tx:0; --ty:0" alt="">
+                        <img class="layer layer--shadow-a" src="escaperimage/lan-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--shadow-b" src="escaperimage/lan-shadow.png" style="--depth:.5" alt="">
+                        <img class="layer layer--char" src="escaperimage/lan.png" style="--depth:1" alt="Lan">
+                    </div>
+
+                    <!-- Ly's poem -->
+                    <p id="lypoem" data-text="The flash of light graced her white robe,&#10;serene and refined,"></p>
+                    <img id="lypin" class="lyset" src="escaperimage/pin.png" alt="">
+                    <p id="lypoem--billowing" data-text="Her wild, billowing hair&#10;overturned the heart,"></p>
+                    <img id="lymini" class="lyset" src="escaperimage/ly-mini.png" alt="">
+                    <p id="lypoem--eyes" data-text="Those glassy, bewitching eyes&#10;Sovereign Ly, the peerless one,&#10;In one fleeting breath, parting came &#10;and longing for her remains."></p>
+
+                    <!-- Lan's poem -->
+                    <p id="lanpoem--lone" data-text="Lone and solitary, deep and fathomless&#10;unreadable,"></p>
+                    <img id="lanpin" class="lanset" src="escaperimage/lan-pin.png" alt="">
+                    <p id="lanpoem--crimson" data-text="Crimson hair, blood-red eyes&#10;turning to blazing flame,"></p>
+                    <img id="lanmini" class="lanset" src="escaperimage/lan-mini.png" alt="">
+                    <p id="lanpoem--tide" data-text="Through the raging tide's fierce swell&#10;one heart, steadfast,&#10;Together into the endless void&#10;the heart at last without a knot."></p>
+
+                    <p id="yaopoem--bright" data-text="Bright and lone and clear&#10;amid the realm of dark unknowing,"></p>
+                    <img id="yaopin" calss="yaoset" src="escaperimage/yao-pin.png" alt="">
+                    <p id="yaopoem--dear" data-text="Deer-soft eyes, sword-blade brows,&#10;a soul pure and clean,"></p>
+                    <img id="yaomini" class="yaoset" src="escaperimage/yao-mini.png" alt="">
+                    <p id="yaopoem--east" data-text="One body, alone, fighting on&#10;the radiance of the East,&#10;Fire bursting, glorious wounds &#10;the body scattering to the wind."></p>
+                </div>
+
+                 <!-- The Escaper Title -->
+                   <h1 id="escapertitle" data-text="The Escapers">The Escapers</h1>
+
+                  <!-- Ly scene: Transition -->
+                   <div id="scene2items">
+                    <div class="dreamcolumn dreamcol--left">
+                        <img class="dreamimage dreampeach lyset" src="escaperimage/peach.png" alt="Peach">
+                        <img class="dreamimage lyset" src="escaperimage/wings.png" alt="Wings">
+                    </div>         
+                    <div class="dreamcolumn dreamcol--right">
+                        <img class="dreamimage lyset" src="escaperimage/strawberry.png" alt="Strawberry">
+                        <img class="dreamimage lyset" src="escaperimage/lily.png" alt="Lily">
+                    </div>
+                    <!-- Lan scene: Transition -->
+                    <div class="dreamcolumn dreamcol--left lancol">
+                        <img class="dreamimage lanimage dreampeach lanset" src="escaperimage/blueberry.png" alt="Blueberry">
+                        <img class="dreamimage lanimage lanset" src="escaperimage/fish.png" alt="Fish">
+                    </div>
+                    <div class="dreamcolumn dreamcol--right lancol">
+                        <img class="dreamimage lanimage lanset" src="escaperimage/maylily.png" alt="Maylily">
+                        <img class="dreamimage lanimage lanset" src="escaperimage/thread.png" alt="Thread">
+                    </div>  
+                    <div class="dreamcolumn dreamcol--left yaocol">
+                        <img class="dreamimage yaoimage dreampeach yaoset" src="escaperimage/star.png" alt="Star">
+                        <img class="dreamimage yaoimage yaoset" src="escaperimage/dear.png" alt="Dear">
+                    </div>
+                    <div class="dreamcolumn dreamcol--right yaocol">
+                        <img class="dreamimage yaoimage yaoset" src="escaperimage/matcha.png" alt="Matcha">
+                        <img class="dreamimage yaoimage yaoset" src="escaperimage/leaf.png" alt="Leaf">
+                    </div>
+                   </div> 
+            </div>
+        </div>
+    </div>
+    <script src="escaper.js" defer></script>
+</body>
+</html>
